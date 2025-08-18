@@ -1,19 +1,21 @@
-#include <engine.h>
 #include <stdio.h>
+#include "engine.h"
 
 int main(void) {
+    const EngineConfig cfg = { .width = 1280, .height = 720, .title = "Donkey Fartbox", .vsync = 1 };
+    Engine* eng = engine_create(&cfg);
+    if (!eng) return 1;
 
-    printf("Trying to make the donkey fartbox run\n");
+    while (!engine_should_quit(eng)) {
+        engine_begin_frame(eng);
 
-    EngineConfig engine_config = { 0 };
-    Engine* engine = engine_create(&engine_config);
+        if (engine_was_key_pressed(eng, KEY_ESCAPE)) break;
 
-    while (engine_should_quit(engine))
-    {
+        engine_clear(eng, 1.0f, 0.12f, 0.15f, 1.0f);
 
+        engine_end_frame(eng);
     }
 
-    engine_shutdown(engine);
-
+    engine_shutdown(eng);
     return 0;
 }
