@@ -5,4 +5,8 @@
 #ifndef FILE_IO_H_H
 #define FILE_IO_H_H
 
+#include <stdio.h>
+
+char* read_file(const char* path, size_t* size);
+
 #endif //FILE_IO_H_H
